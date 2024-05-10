@@ -2,6 +2,7 @@
   "name": "svelte-app",
   "version": "1.0.0",
   "private": true,
+  "author": "Iva Stolnik",
   "type": "module",
   "scripts": {
     "build": "rollup -c",
