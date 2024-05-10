@@ -1,0 +1,6 @@
+{
+    "name": "Svelte Custom Card",
+    "render_readme": true,
+    "filename": "main_prod.js",
+    "content_in_root": true
+  }
