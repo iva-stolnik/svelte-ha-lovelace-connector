@@ -1,107 +1,52 @@
-# This repo is no longer maintained. Consider using `npm init vite` and selecting the `svelte` option or — if you want a full-fledged app framework — use [SvelteKit](https://kit.svelte.dev), the official application framework for Svelte.
+# Svelte Home Assistant Custom Component AND Lovelace Connector
 
----
+### IMPORTANT NOTES:
+   * development is separated from HA server and svelte is not required to be installed on HA server
+   * `/local/` is `/config/www/` directory in HA
+   * `/config/www/` is exposed to lovelace dashboard, it's starting point on HA server
+   * Idea is to use HTMLElement to get access to its setConfig method (lovelace requirement)
+        - this retrieves config from lovelace card yaml
+        - HTMLElement is othervise dumb and serves only as a wrapper for svelte component that passes config
+        - whole state management and comunication can be done in svelte component
+        - pass whole `hass` object and utilize its functionality
+   * In case you want to use hacs.json and to be able to add **your new repository to HACS** as custom repo
+        - hacs.json is already added to this repo
+        - before commiting and pushing changes to git, run `npm run build`
+        - after code is pushed to git, create release and add new tag
+        - go in HACS and add your repo, or redownload new version
 
-# svelte app
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
+#### Clone project:
+```
+   git clone https://github.com/iva-stolnik/svelte-ha-lovelace-connector
+   npm install
+   npm run dev
 ```
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
-
-## Get started
-
-Install the dependencies...
-
-```bash
-cd svelte-app
-npm install
+Build svelte custom component:
 ```
-
-...then start [Rollup](https://rollupjs.org):
-
-```bash
-npm run dev
+   npm run build
 ```
+   * output in dist/ dir will be used in Home Assistant
 
-Navigate to [localhost:8080](http://localhost:8080). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+### Home Aassistant setup:
+#### In HA /config/www/ create file:
+   * if using HACS skip this part
+   * svelte-custom-card.js // or any other name
+      * here copy paste build output from `main_prod.js` after you run `npm run build`
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
-
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
+#### Setup dashboard:
+   * if using HACS skip this part also
+   * open dashboards -> 3 dots in right corner -> resources -> ADD RESOURCES
+   * setup paths for new component: 
 ```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
+   /local/svelte-custom-card.js // for svelte component
 ```
+   * setup resource type to JS module for both components
+   * on your dashboard create new card -> show code editor -> paste following:
+   ```
+type: custom:lit-custom-card
+someProp: You did it legend :)
+   ```
+   * save card -> exit dashboard editor
 
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-If you want to use `baseUrl` or `path` aliases within your `tsconfig`, you need to set up `@rollup/plugin-alias` to tell Rollup to resolve the aliases. For more info, see [this StackOverflow question](https://stackoverflow.com/questions/63427935/setup-tsconfig-path-in-svelte).
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+## THATS IT!
