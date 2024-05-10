@@ -1,5 +1,5 @@
 # Svelte Home Assistant Custom Component AND Lovelace Connector
-Create custom cards for HA with Svelte!!
+Starter Project - create custom cards for HA with Svelte!!
 
 ### IMPORTANT NOTES:
    * development is separated from HA server and svelte is not required to be installed on HA server
