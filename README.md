@@ -29,13 +29,12 @@ Build svelte custom component:
    * output in dist/ dir will be used in Home Assistant
 
 ### Home Aassistant setup:
+**if using HACS skip both steps**
 #### In HA /config/www/ create file:
-   * if using HACS skip this part
    * svelte-custom-card.js // or any other name
       * here copy paste build output from `main_prod.js` after you run `npm run build`
 
 #### Setup dashboard:
-   * if using HACS skip this part also
    * open dashboards -> 3 dots in right corner -> resources -> ADD RESOURCES
    * setup paths for new component: 
 ```
