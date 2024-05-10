@@ -46,9 +46,9 @@
     });
 </script>
 
-<div>
+<ha-card style="padding:1em;">
     <h1>Configuration</h1>
-    <pre>{$configIn}</pre>
+    <p>{$configIn}</p>
     <h2>Status: {$haStatus}</h2>
     <div>
         <button on:click={() => callService('light', 'toggle', { entity_id: 'light.wl_office_1'})}>
@@ -60,4 +60,4 @@
             Toggle Light (call websocket)
         </button>
     </div>
-</div>
+</ha-card>
