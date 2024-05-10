@@ -34,7 +34,8 @@
 
     onMount(() => {
         if (config) {
-            configIn.set(config);
+            const configOut = JSON.stringify(config)
+            configIn.set(configOut);
         }
 
         if (hass) {
