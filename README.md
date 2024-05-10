@@ -44,7 +44,7 @@ Build svelte custom component:
    * setup resource type to JS module for both components
    * on your dashboard create new card -> show code editor -> paste following:
    ```
-type: custom:lit-custom-card
+type: custom:svelte-custom-card
 someProp: You did it legend :)
    ```
    * save card -> exit dashboard editor
