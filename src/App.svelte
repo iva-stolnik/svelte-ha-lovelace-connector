@@ -51,12 +51,12 @@
     <p>{$configIn}</p>
     <h2>Status: {$haStatus}</h2>
     <div>
-        <button on:click={() => callService('light', 'toggle', { entity_id: 'light.wl_office_1'})}>
+        <button on:click={() => callService('light', 'toggle', { entity_id: config.entity_id})}>
             Toggle Light (call service)
         </button>
     </div>
     <div>
-        <button on:click={() => callWebSocket('call_service', 'light', 'toggle', { entity_id: 'light.wl_office_1' })}>
+        <button on:click={() => callWebSocket('call_service', 'light', 'toggle', { entity_id: config.entity_id })}>
             Toggle Light (call websocket)
         </button>
     </div>
